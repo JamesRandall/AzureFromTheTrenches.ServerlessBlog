@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>{{pageTitle}}</title>
+        <link href="{{stylesheetUrl}}" rel="stylesheet" />
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:regular' type='text/css' media='all' />
+        <link href="{{faviconUrl}}" rel="shortcut icon" type="image/x-icon" />
+    </head>
+    <body>
+        <div class="title-panel">
+            <div class="container">
+                <a class="primary-title" href="/">{{blogName}}</a>
+                <!--<span class="secondary-title">A simple static file and serverless based blog</span>-->
+            </div>
+        </div>
+        <div class="container">
+            <div class="content">            
+                <div class="reading">                            
+                    {{{readingContent}}}
+                </div>
+                <div class="sidebar">
+                    {{{sidebar}}}
+                </div>
+            </div>
+        </div>
+        <div class="footer-panel">
+            <div class="container">
+                Copyright &copy; {{defaultAuthor}}
+            </div>
+        </div>
+    </body>
+</html>

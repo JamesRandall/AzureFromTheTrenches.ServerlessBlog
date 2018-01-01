@@ -1,0 +1,18 @@
+<h2>Recent Posts</h2>
+<ul>
+    {{#each recentPosts}}
+        <li><a href="/{{urlName}}">{{title}}</a></li>        
+    {{/each}}    
+</ul>
+<h2>Archives</h2>
+<ul>
+    {{#each archives}}
+        <li><a href="/archive/{{year}}/{{month}}">{{displayName}}</a></li>
+    {{/each}}    
+</ul>
+<h2>Categories</h2>
+<ul>
+    {{#each categories}}
+        <li><a href="/category/{{urlName}}">{{displayName}}</a></li>
+    {{/each}}    
+</ul>

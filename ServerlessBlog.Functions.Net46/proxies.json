@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json.schemastore.org/proxies",
+  "proxies": {
+    "HomePageProxy": {
+      "matchCondition": {
+        "route": "/",
+        "methods": [
+          "GET"
+        ]
+      },
+      "backendUri": "https://%BlogDomain%/home",
+      "responseOverrides": {
+        "response.headers.Content-Type": "text/html"
+      }
+    },
+    "PostProxy": {
+      "matchCondition": {
+        "route": "/{postname}",
+        "methods": [
+          "GET"
+        ]
+      },
+      "backendUri": "https://serverlessblog-dev.azurewebsites.net/post/{postname}",
+      "responseOverrides": {
+        "response.headers.Content-Type": "text/html"
+      }
+    }
+  }
+}

@@ -1,0 +1,210 @@
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto';
+    text-rendering: optimizeLegibility;
+    color: rgb(76, 85, 90);
+    font-weight: 400;
+    line-height: 24px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto';
+    text-rendering: optimizeLegibility;
+    color: rgb(76, 85, 90);
+    font-weight: 400;
+    line-height: 24px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.title-panel {
+    height: 64px;
+    border-bottom: rgb(234, 236, 238) solid 1px;
+    line-height: 64px;
+    margin-bottom: 32px;
+}
+
+.footer-panel {
+    height: 64px;
+    border-top: rgb(234, 236, 238) solid 1px;
+    line-height: 64px;
+}
+
+.primary-title {
+    font-size: 19px;
+    color: rgb(76, 85, 90);
+    cursor: pointer;
+    line-height: 64px;
+    font-family: 'Roboto';
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.post-spacer {
+    margin-top: 32px;
+    margin-bottom: 32px;
+    border-bottom: rgb(234, 236, 238) solid 1px;
+}
+
+.content {
+
+}
+
+.reading {
+    margin-bottom: 2em;    
+    margin-right: 32px;
+    min-width: 0;
+}
+
+.reading a {
+    color: rgb(0, 140, 221);
+    text-decoration: none;
+}
+
+.reading a:hover {
+    color: rgb(76, 85, 90);
+}
+
+.post-title {
+    margin-bottom: 4px;
+}
+
+.sidebar {
+    
+}
+
+.content h1 {
+    margin-top: 16px;
+    color: rgb(76, 85, 90);
+    font-size: 32px;
+    line-height: 36px;
+    font-weight: 400;
+}
+
+.content h1 a {
+    margin-top: 16px;
+    color: rgb(76, 85, 90);
+    font-size: 32px;
+    text-decoration: none;
+}
+
+.content h1 a:hover {
+    color: #008cdd;
+}
+
+.content h2 {
+    font-size: 16px;
+    margin-top: 16px;
+    color: rgb(76, 85, 90);
+    cursor: pointer;
+    line-height: 1.5em;
+    font-family: 'Roboto';
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.sidebar ul {
+    padding: 0;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+}
+
+.sidebar ul li {
+    margin-bottom: 16px;
+}
+
+.sidebar h2 {
+    padding-bottom: 8px;
+    border-bottom: rgb(234, 236, 238) solid 1px;
+}
+
+.sidebar h2:not(:first-child) {
+    margin-top: 48px;
+}
+
+.sidebar a {
+    display: block;
+    color: rgb(76, 85, 90);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    color: rgb(35, 115, 161);
+}
+
+@media screen and (min-width: 1008px) {
+    .content {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .reading {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .sidebar {
+        flex: 0 25%;
+    }
+}
+
+.container {
+    margin: 0 auto;
+    position: relative;
+}
+
+pre {
+    overflow: auto;
+    max-width: 100%;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+@media screen and (min-width: 1008px) {
+    .container {
+      max-width: 960px;
+      width: 960px;
+    }
+    .container.is-fluid {
+      margin-left: 24px;
+      margin-right: 24px;
+      max-width: none;
+      width: auto;
+    }
+  }
+  
+  @media screen and (max-width: 1199px) {
+    .container.is-widescreen {
+      max-width: 1152px;
+      width: auto;
+    }
+  }
+  
+  @media screen and (max-width: 1391px) {
+    .container.is-fullhd {
+      max-width: 1344px;
+      width: auto;
+    }
+  }
+  
+  @media screen and (min-width: 1200px) {
+    .container {
+      max-width: 1152px;
+      width: 1152px;
+    }
+  }
+  
+  @media screen and (min-width: 1392px) {
+    .container {
+      max-width: 1344px;
+      width: 1344px;
+    }
+  }
