@@ -4,7 +4,7 @@
     {
         public ConfigurationOptions()
         {
-            S3Bucket = "serverlessblobdev.azurefromthetrenches.com";
+            S3Bucket = "serverlessblogdev.azurefromthetrenches.com";
         }
 
         public string AzureStorageAccountConnectionString { get; set; }

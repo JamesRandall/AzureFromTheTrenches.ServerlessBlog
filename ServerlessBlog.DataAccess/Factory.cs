@@ -30,9 +30,13 @@ namespace ServerlessBlog.DataAccess
             Instance = new Factory(configuration, cloudVendor);
         }
 
-        public ICategoryRepository GetCategoryRepository() => new AzureCategoryRepository(_azureStorageAccountConnectionString, new CategoryListBuilder());
+        public ICategoryRepository GetCategoryRepository() => _cloudVendor == CloudVendorEnum.Azure ?
+            (ICategoryRepository)new AzureCategoryRepository(_azureStorageAccountConnectionString, new CategoryListBuilder()) :
+            new DynamoDbCategoryRepository(new CategoryListBuilder());
 
-        public IPostingTimeRepository GetPostingTimeRepository() => new AzurePostingTimeRepository(_azureStorageAccountConnectionString);
+        public IPostingTimeRepository GetPostingTimeRepository() => _cloudVendor == CloudVendorEnum.Azure ?
+            (IPostingTimeRepository)new AzurePostingTimeRepository(_azureStorageAccountConnectionString) :
+            new DynamoDbPostingTimeRepository();
 
         public IPostRepository GetPostRepository() => new PostRepository(GetBlobStoreFactory(), new PostParser(new CategoryParser()), _defaultAuthor);
 
