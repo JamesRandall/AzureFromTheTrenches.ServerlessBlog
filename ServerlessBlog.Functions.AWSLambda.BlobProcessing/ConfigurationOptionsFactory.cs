@@ -10,7 +10,7 @@ namespace ServerlessBlog.Functions.AWSLambda
             ConfigurationOptions options = new ConfigurationOptions
             {
                 BlogName = Environment.GetEnvironmentVariable("BlogName"),
-                StorageAccountConnectionString = Environment.GetEnvironmentVariable("BlogStorage"),
+                AzureStorageAccountConnectionString = Environment.GetEnvironmentVariable("BlogStorage"),
                 DefaultAuthor = Environment.GetEnvironmentVariable("DefaultAuthor"),
                 StylesheetUrl = Environment.GetEnvironmentVariable("StylesheetUrl"),
                 FavIconUrl = Environment.GetEnvironmentVariable("FavIconUrl"),

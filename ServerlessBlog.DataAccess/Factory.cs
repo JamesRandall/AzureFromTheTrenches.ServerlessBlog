@@ -1,4 +1,5 @@
 ﻿using ServerlessBlog.DataAccess.Implementation;
+using ServerlessBlog.DataAccess.Implementation.AWS;
 using ServerlessBlog.DataAccess.Implementation.Azure;
 using ServerlessBlog.DataAccess.Implementation.Parsing;
 using ServerlessBlog.Model;
@@ -9,22 +10,19 @@ namespace ServerlessBlog.DataAccess
     {
         private readonly CloudVendorEnum _cloudVendor;
 
-        public enum CloudVendorEnum
-        {
-            Aws,
-            Azure
-        }
-        
         private readonly string _defaultAuthor;
-        private readonly string _storageAccount;
-        
+        private readonly string _azureStorageAccountConnectionString;
+        private readonly string _s3Bucket;
+
+
         public static Factory Instance { get; private set; }
 
         private Factory(IConfigurationOptions configuration, CloudVendorEnum cloudVendor)
         {
             _cloudVendor = cloudVendor;
             _defaultAuthor = configuration.DefaultAuthor;
-            _storageAccount = configuration.StorageAccountConnectionString;
+            _azureStorageAccountConnectionString = configuration.AzureStorageAccountConnectionString;
+            _s3Bucket = configuration.S3Bucket;
         }
 
         public static void Create(IConfigurationOptions configuration, CloudVendorEnum cloudVendor)
@@ -32,21 +30,18 @@ namespace ServerlessBlog.DataAccess
             Instance = new Factory(configuration, cloudVendor);
         }
 
-        public IPostRepository GetPostRepository()
-        {
-            return new PostRepository(GetBlobStoreFactory(), new PostParser(new CategoryParser()), _defaultAuthor);
-        }
+        public ICategoryRepository GetCategoryRepository() => new AzureCategoryRepository(_azureStorageAccountConnectionString, new CategoryListBuilder());
 
-        public ICategoryRepository GetCategoryRepository() => new AzureCategoryRepository(StorageAccountConnectionString, new CategoryListBuilder());
+        public IPostingTimeRepository GetPostingTimeRepository() => new AzurePostingTimeRepository(_azureStorageAccountConnectionString);
 
-        public IPostingTimeRepository GetPostingTimeRepository() => new AzurePostingTimeRepository(StorageAccountConnectionString);
+        public IPostRepository GetPostRepository() => new PostRepository(GetBlobStoreFactory(), new PostParser(new CategoryParser()), _defaultAuthor);
 
         public ITemplateRepository GetTemplateRepository() => new TemplateRepository(GetBlobStoreFactory());
 
-        public IOutputRepository GetOutputRepository() => new OutputRepository(StorageAccountConnectionString);
+        public IOutputRepository GetOutputRepository() => new OutputRepository(GetBlobStoreFactory());
 
-        internal IBlobStoreFactory GetBlobStoreFactory() => new AzureBlobStoreFactory(_storageAccount);
-
-        //private string StorageAccountConnectionString => _useLocalFileSystem ? "UseDevelopmentStorage=true" : _storageAccount;        
+        internal IBlobStoreFactory GetBlobStoreFactory() => _cloudVendor == CloudVendorEnum.Azure ? 
+            (IBlobStoreFactory)new AzureBlobStoreFactory(_azureStorageAccountConnectionString) :
+            new S3BlobStoreFactory(_s3Bucket);
     }
 }

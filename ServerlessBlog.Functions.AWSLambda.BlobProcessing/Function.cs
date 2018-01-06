@@ -9,6 +9,7 @@ using Amazon.Lambda.S3Events;
 using Amazon.S3;
 using Amazon.S3.Util;
 using ServerlessBlog.Functions.AWSLambda;
+using ServerlessBlog.Model;
 using ServerlessBlog.Runtime;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
@@ -86,7 +87,7 @@ namespace BlobProcessing
                 using (var objectResponse = await _s3Client.GetObjectAsync(record.S3.Bucket.Name, record.S3.Object.Key))
                 using (Stream responseStream = objectResponse.ResponseStream)
                 {
-                    Factory.Create(ConfigurationOptionsFactory.Create());
+                    Factory.Create(ConfigurationOptionsFactory.Create(), CloudVendorEnum.Aws);
 
                     IStaticAssetManager staticAssetManager = Factory.Instance.GetRenderer();
                     await staticAssetManager.AddOrUpdatePost(responseStream);

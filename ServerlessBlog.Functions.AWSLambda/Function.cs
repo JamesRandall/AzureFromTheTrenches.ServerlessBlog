@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using Amazon.Lambda.Core;
 using Amazon.Lambda.APIGatewayEvents;
+using ServerlessBlog.Model;
 using ServerlessBlog.Runtime;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
@@ -33,7 +34,7 @@ namespace ServerlessBlog.Functions.AWSLambda
         public async Task<APIGatewayProxyResponse> GetHomepage(APIGatewayProxyRequest request, ILambdaContext context)
         {
             context.Logger.LogLine("GetHomepage triggered");
-            Factory.Create(ConfigurationOptionsFactory.Create());
+            Factory.Create(ConfigurationOptionsFactory.Create(), CloudVendorEnum.Aws);
 
             IWebPageComposer webPageComposer = Factory.Instance.GetResponseRenderer();
             string content = await webPageComposer.GetHomepage();

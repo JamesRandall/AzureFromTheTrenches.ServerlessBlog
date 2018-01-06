@@ -12,15 +12,15 @@ namespace ServerlessBlog.Runtime
         private readonly IConfigurationOptions _configuration;
         public static Factory Instance;
 
-        private Factory(IConfigurationOptions configuration, bool runLocally)
+        private Factory(IConfigurationOptions configuration, CloudVendorEnum cloudVendor)
         {
             _configuration = configuration;
-            DataAccess.Factory.Create(configuration, runLocally);
+            DataAccess.Factory.Create(configuration, cloudVendor);
         }
 
-        public static void Create(IConfigurationOptions configuration, bool runLocally = false)
+        public static void Create(IConfigurationOptions configuration, CloudVendorEnum cloudVendor)
         {
-            Instance = new Factory(configuration, runLocally);
+            Instance = new Factory(configuration, cloudVendor);
         }
 
         public IStaticAssetManager GetRenderer() => new StaticAssetManager(

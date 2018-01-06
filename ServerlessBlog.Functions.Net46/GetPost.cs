@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
+using ServerlessBlog.Model;
 using ServerlessBlog.Runtime;
 
 namespace ServerlessBlog.Functions.Net46
@@ -15,7 +16,7 @@ namespace ServerlessBlog.Functions.Net46
         public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "post/{postName}")]HttpRequestMessage req, string postName, TraceWriter log)
         {
             log.Info($"GetPost triggered for {postName}");
-            Factory.Create(ConfigurationOptionsFactory.Create());
+            Factory.Create(ConfigurationOptionsFactory.Create(), CloudVendorEnum.Azure);
 
             IWebPageComposer webPageComposer = Factory.Instance.GetResponseRenderer();
             string content = await webPageComposer.GetPost(postName);
