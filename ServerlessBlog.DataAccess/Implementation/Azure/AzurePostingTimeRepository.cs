@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage;
@@ -7,14 +6,14 @@ using Microsoft.WindowsAzure.Storage.Table;
 using ServerlessBlog.DataAccess.Implementation.Model;
 using ServerlessBlog.Model;
 
-namespace ServerlessBlog.DataAccess.Implementation
+namespace ServerlessBlog.DataAccess.Implementation.Azure
 {
-    internal class PostingTimeRepository : IPostingTimeRepository
+    internal class AzurePostingTimeRepository : IPostingTimeRepository
     {
         private const string TableName = "postingtimes";
         private readonly CloudTable _table;
 
-        public PostingTimeRepository(string storageAccountConnectionString)
+        public AzurePostingTimeRepository(string storageAccountConnectionString)
         {
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(storageAccountConnectionString);
             CloudTableClient tableClient = storageAccount.CreateCloudTableClient();

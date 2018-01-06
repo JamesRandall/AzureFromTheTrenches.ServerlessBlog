@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerlessBlog.DataAccess",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerlessBlog.Functions.Net46", "ServerlessBlog.Functions.Net46\ServerlessBlog.Functions.Net46.csproj", "{29727C8E-9BC8-4350-B486-CD936D0AA846}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerlessBlog.Functions.AWSLambda", "ServerlessBlog.Functions.AWSLambda\ServerlessBlog.Functions.AWSLambda.csproj", "{AB162484-F5F7-4591-8C05-2B2193F3EEFD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerlessBlog.Functions.AWSLambda.BlobProcessing", "ServerlessBlog.Functions.AWSLambda.BlobProcessing\ServerlessBlog.Functions.AWSLambda.BlobProcessing.csproj", "{47FFDA00-CD9E-4B1A-BE43-3519755FC1C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{29727C8E-9BC8-4350-B486-CD936D0AA846}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29727C8E-9BC8-4350-B486-CD936D0AA846}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29727C8E-9BC8-4350-B486-CD936D0AA846}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB162484-F5F7-4591-8C05-2B2193F3EEFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB162484-F5F7-4591-8C05-2B2193F3EEFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB162484-F5F7-4591-8C05-2B2193F3EEFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB162484-F5F7-4591-8C05-2B2193F3EEFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47FFDA00-CD9E-4B1A-BE43-3519755FC1C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47FFDA00-CD9E-4B1A-BE43-3519755FC1C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47FFDA00-CD9E-4B1A-BE43-3519755FC1C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47FFDA00-CD9E-4B1A-BE43-3519755FC1C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

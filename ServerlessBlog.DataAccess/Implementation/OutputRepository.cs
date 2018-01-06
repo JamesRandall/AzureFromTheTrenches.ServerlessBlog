@@ -7,15 +7,13 @@ namespace ServerlessBlog.DataAccess.Implementation
 {
     class OutputRepository : IOutputRepository
     {
-        private readonly CloudBlobContainer _blobContainer;
+        private readonly IBlobStore _blobStore;
         private const string SidebarSnippetName = "sidebar";
         private const string HomepageSnippetName = "homepage";
 
-        public OutputRepository(string storageConnectionString)
+        public OutputRepository(IBlobStoreFactory blobStoreFactory)
         {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(storageConnectionString);
-            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-            _blobContainer = blobClient.GetContainerReference("output");
+            _blobStore = blobStoreFactory.Create("output");
         }
 
         public Task<string> GetCategory(string categoryUrlName)
@@ -89,8 +87,7 @@ namespace ServerlessBlog.DataAccess.Implementation
         private async Task<string> GetSnippet(string name)
         {
             string filename = GetAssetFilename(name);
-            CloudBlockBlob blob = _blobContainer.GetBlockBlobReference(filename);
-            string result = await blob.DownloadTextAsync();
+            string result = await _blobStore.Get(filename);
             return result;
         }
 
@@ -103,9 +100,7 @@ namespace ServerlessBlog.DataAccess.Implementation
         private async Task SaveSnippet(string name, string htmlSnippet)
         {
             string filename = GetAssetFilename(name);
-            CloudBlockBlob blob = _blobContainer.GetBlockBlobReference(filename);
-            byte[] bytes = Encoding.UTF8.GetBytes(htmlSnippet);
-            await blob.UploadFromByteArrayAsync(bytes, 0, bytes.Length);
+            await _blobStore.Save(filename, htmlSnippet);
         }
     }
 }

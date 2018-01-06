@@ -1,19 +1,14 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
+﻿using System.Threading.Tasks;
 
 namespace ServerlessBlog.DataAccess.Implementation
 {
     internal class TemplateRepository : ITemplateRepository
     {
-        private readonly CloudBlobContainer _blobContainer;
+        private readonly IBlobStore _blobStore;
 
-        public TemplateRepository(string storageConnectionString)
+        public TemplateRepository(IBlobStoreFactory blobStoreFactory)
         {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(storageConnectionString);
-            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-            _blobContainer = blobClient.GetContainerReference("templates");
+            _blobStore = blobStoreFactory.Create("templates");
         }
 
         public Task<string> GetLayoutTemplate()
@@ -43,8 +38,7 @@ namespace ServerlessBlog.DataAccess.Implementation
 
         private async Task<string> GetWithFilename(string filename)
         {
-            CloudBlockBlob blob = _blobContainer.GetBlockBlobReference(filename);
-            string result = await blob.DownloadTextAsync();
+            string result = await _blobStore.Get(filename);
             return result;
         }
     }

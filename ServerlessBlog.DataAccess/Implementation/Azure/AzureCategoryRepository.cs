@@ -5,15 +5,15 @@ using Microsoft.WindowsAzure.Storage.Table;
 using ServerlessBlog.DataAccess.Implementation.Model;
 using ServerlessBlog.Model;
 
-namespace ServerlessBlog.DataAccess.Implementation
+namespace ServerlessBlog.DataAccess.Implementation.Azure
 {
-    internal class CategoryRepository : ICategoryRepository
+    internal class AzureCategoryRepository : ICategoryRepository
     {
         private readonly ICategoryListBuilder _categoryListBuilder;
         private const string TableName = "categories";
         private readonly CloudTable _table;
 
-        public CategoryRepository(string storageAccountConnectionString, ICategoryListBuilder categoryListBuilder)
+        public AzureCategoryRepository(string storageAccountConnectionString, ICategoryListBuilder categoryListBuilder)
         {
             _categoryListBuilder = categoryListBuilder;
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(storageAccountConnectionString);

@@ -10,7 +10,7 @@ namespace ServerlessBlog.Runtime.Helpers.Implementation
             string html = CommonMark.CommonMarkConverter.Convert(markdown);
 
             // we have to munge in the author and post date here as it won't appear in the markdown source
-            int endOfTitle = html.IndexOf("</h1>", StringComparison.InvariantCultureIgnoreCase);
+            int endOfTitle = html.IndexOf("</h1>", StringComparison.OrdinalIgnoreCase);
             if (endOfTitle == -1)
             {
                 return html;
